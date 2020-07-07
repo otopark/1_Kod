@@ -1,0 +1,905 @@
+Müşteri ana sayfası kodları:
+
+using System;
+using System.Collections.Generic; using System.Linq;
+using System.Web; using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class MusteriAnasayfaController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: MusteriAnasayfa public ActionResult Index()
+{
+return View(db.Parkdurumu.ToList());
+}
+}
+}
+
+Müşterinin bilgilerini kontrol ettiği kısım:
+
+using System;
+using System.Collections.Generic; using System.Data;
+using System.Data.Entity; using System.Linq;
+using System.Net; using System.Web;
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class MusteriBilController : Controller
+{
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: MusteriBil
+public ActionResult Index(Musteri_Listesi Musteri)
+{
+
+return View(db.Musteri_Listesi.ToList());
+}
+
+// GET: MusteriBil/Details/5
+public ActionResult Details(int? id)
+{
+ 
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+}
+
+// GET: MusteriBil/Create public ActionResult Create()
+{
+return View();
+}
+
+// POST: MusteriBil/Create [HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "id,Tc_No,Ad,Soyad,Cep_Telefonu,Plaka,Kullanıcı_Adı,E_Posta,Sifre,Sifre_Tekrar")] Musteri_Listesi musteri_Listesi)
+{
+if (ModelState.IsValid)
+{
+db.Musteri_Listesi.Add(musteri_Listesi); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+return View(musteri_Listesi);
+}
+
+// GET: MusteriBil/Edit/5
+public ActionResult Edit(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+}
+ 
+// POST: MusteriBil/Edit/5 [HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Edit([Bind(Include = "id,Tc_No,Ad,Soyad,Cep_Telefonu,Plaka,Kullanıcı_Adı,E_Posta,Sifre,Sifre_Tekrar")] Musteri_Listesi musteri_Listesi)
+{
+if (ModelState.IsValid)
+{
+db.Entry(musteri_Listesi).State = EntityState.Modified; db.SaveChanges();
+return RedirectToAction("Index");
+}
+return View(musteri_Listesi);
+}
+
+// GET: MusteriBil/Delete/5
+public ActionResult Delete(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+}
+
+// POST: MusteriBil/Delete/5 [HttpPost, ActionName("Delete")] [ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id)
+{
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); db.Musteri_Listesi.Remove(musteri_Listesi); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+protected override void Dispose(bool disposing)
+{
+if (disposing)
+{
+db.Dispose();
+}
+base.Dispose(disposing);
+}
+ 
+}
+}
+
+
+Müşteri login ve kayıt sayfası:
+
+using System;
+using Garaj_Otomasyonu.Models.Entity; using System.Collections.Generic;
+using System.Linq; using System.Web; using System.Web.Mvc;
+using System.Web.Security;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class MusteriGirişController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: MusteriGiriş
+public ActionResult Login()
+{
+return View();
+}
+[HttpPost]
+public ActionResult Login(Musteri_Listesi Musteri)
+{
+var musteri = db.Musteri_Listesi.FirstOrDefault(x => x.Kullanıcı_Adı == Musteri.Kullanıcı_Adı && x.Sifre == Musteri.Sifre);
+if (musteri != null)
+{
+
+FormsAuthentication.SetAuthCookie(musteri.Kullanıcı_Adı, false); return RedirectToAction("Index", "MusteriAnasayfa");
+}
+else
+{
+ViewBag.Mesaj = "Geçersiz Kullanıcı Adı veya Şifre"; return View();
+}
+}
+public ActionResult Logout()
+{
+FormsAuthentication.SignOut(); return View("Login");
+}
+public ActionResult Create()
+{
+return View();
+}
+ 
+// POST: MusteriBil/Create
+
+[HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "id,Tc_No,Ad,Soyad,Cep_Telefonu,Plaka,Kullanıcı_Adı,E_Posta,Sifre,Sifre_Tekrar")] Musteri_Listesi musteri_Listesi)
+{
+if (ModelState.IsValid)
+{
+db.Musteri_Listesi.Add(musteri_Listesi); db.SaveChanges();
+return RedirectToAction("Login");
+}
+
+return View(musteri_Listesi);
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Müşteri rezervasyon sayfası:
+
+using System;
+
+using System.Collections.Generic; using System.Data;
+using System.Data.Entity; using System.Linq;
+using System.Net; using System.Web;
+using System.Web.Mvc;
+
+using Garaj_Otomasyonu.Models.Entity;
+ 
+namespace Garaj_Otomasyonu.Controllers
+
+{
+
+public class MusRezervasyonController : Controller
+
+{
+
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: MusRezervasyon public ActionResult Index()
+{
+
+var rezervasyon = db.Rezervasyon.Include(r => r.Parkdurumu); return View(rezervasyon.ToList());
+}
+
+// GET: MusRezervasyon/Details/5 public ActionResult Details(int? id)
+{
+
+if (id == null)
+
+{
+
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+}
+
+Rezervasyon rezervasyon = db.Rezervasyon.Find(id); if (rezervasyon == null)
+{
+
+return HttpNotFound();
+
+}
+
+return View(rezervasyon);
+
+}
+ 
+// GET: MusRezervasyon/Create public ActionResult Create()
+{
+
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno"); return View();
+}
+
+// POST: MusRezervasyon/Create
+
+// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+// more details see http://go.microsoft.com/fwlink/?LinkId=317598. [HttpPost]
+[ValidateAntiForgeryToken]
+
+public ActionResult Create([Bind(Include = "id,Ad,Soyad,TC_No,Saat,Plaka,Park_Yeri")] Rezervasyon rezervasyon)
+{
+
+if (ModelState.IsValid)
+
+{
+
+db.Rezervasyon.Add(rezervasyon); db.SaveChanges();
+return RedirectToAction("Index");
+
+}
+
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", rezervasyon.Park_Yeri);
+return View(rezervasyon);
+
+}
+ 
+// GET: MusRezervasyon/Edit/5 public ActionResult Edit(int? id)
+{
+
+if (id == null)
+
+{
+
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+}
+
+Rezervasyon rezervasyon = db.Rezervasyon.Find(id); if (rezervasyon == null)
+{
+
+return HttpNotFound();
+
+}
+
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", rezervasyon.Park_Yeri);
+return View(rezervasyon);
+
+}
+
+// POST: MusRezervasyon/Edit/5
+
+// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+// more details see http://go.microsoft.com/fwlink/?LinkId=317598. [HttpPost]
+[ValidateAntiForgeryToken]
+
+public ActionResult Edit([Bind(Include = "id,Ad,Soyad,TC_No,Saat,Plaka,Park_Yeri")] Rezervasyon rezervasyon)
+{
+
+if (ModelState.IsValid)
+
+{
+
+db.Entry(rezervasyon).State = EntityState.Modified;
+ 
+db.SaveChanges();
+
+return RedirectToAction("Index");
+
+}
+
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", rezervasyon.Park_Yeri);
+return View(rezervasyon);
+
+}
+
+// GET: MusRezervasyon/Delete/5 public ActionResult Delete(int? id)
+{
+
+if (id == null)
+
+{
+
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+}
+
+Rezervasyon rezervasyon = db.Rezervasyon.Find(id); if (rezervasyon == null)
+{
+
+return HttpNotFound();
+
+}
+
+return View(rezervasyon);
+
+}
+
+// POST: MusRezervasyon/Delete/5 [HttpPost, ActionName("Delete")] [ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id)
+
+{
+
+Rezervasyon rezervasyon = db.Rezervasyon.Find(id);
+ 
+db.Rezervasyon.Remove(rezervasyon); db.SaveChanges();
+return RedirectToAction("Index");
+
+}
+
+protected override void Dispose(bool disposing)
+
+{
+
+if (disposing)
+
+{
+
+db.Dispose();
+
+}
+
+base.Dispose(disposing);
+
+}
+
+}
+
+}
+
+---------------------------------------------------------
+PERSONEL İÇİN ASP.NET KODLARI:
+
+Personel araç-giriş çıkış işlemleri kodları:
+
+using System;
+using System.Collections.Generic; using System.Data;
+using System.Data.Entity; using System.Linq;
+using System.Net; using System.Web;
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class Araç_Giriş_ÇıkışController : Controller
+{
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: Araç_Giriş_Çıkış public ActionResult Index()
+{
+var park_Kayıt = db.Park_Kayıt.Include(p => p.Parkdurumu); return View(park_Kayıt.ToList());
+}
+
+// GET: Araç_Giriş_Çıkış/Details/5 public ActionResult Details(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Park_Kayıt park_Kayıt = db.Park_Kayıt.Find(id); if (park_Kayıt == null)
+{
+return HttpNotFound();
+}
+return View(park_Kayıt);
+}
+
+// GET: Araç_Giriş_Çıkış/Create public ActionResult Create()
+{
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno"); return View();
+}
+
+// POST: Araç_Giriş_Çıkış/Create
+ 
+[HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "id,Tc_No,Ad,Soyad,Plaka,Park_Yeri,Giriş_Zamanı,Çıkış_Zamanı,Ücret")] Park_Kayıt park_Kayıt)
+{
+if (ModelState.IsValid)
+{
+db.Park_Kayıt.Add(park_Kayıt); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", park_Kayıt.Park_Yeri);
+return View(park_Kayıt);
+}
+
+// GET: Araç_Giriş_Çıkış/Edit/5 public ActionResult Edit(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Park_Kayıt park_Kayıt = db.Park_Kayıt.Find(id); if (park_Kayıt == null)
+{
+return HttpNotFound();
+}
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", park_Kayıt.Park_Yeri);
+return View(park_Kayıt);
+}
+
+// POST: Araç_Giriş_Çıkış/Edit/5 [HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Edit([Bind(Include = "id,Tc_No,Ad,Soyad,Plaka,Park_Yeri,Giriş_Zamanı,Çıkış_Zamanı,Ücret")] Park_Kayıt park_Kayıt)
+{
+if (ModelState.IsValid)
+{
+db.Entry(park_Kayıt).State = EntityState.Modified; db.SaveChanges();
+return RedirectToAction("Index");
+}
+ViewBag.Park_Yeri = new SelectList(db.Parkdurumu, "id", "parkno", park_Kayıt.Park_Yeri);
+ 
+return View(park_Kayıt);
+}
+
+// GET: Araç_Giriş_Çıkış/Delete/5 public ActionResult Delete(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Park_Kayıt park_Kayıt = db.Park_Kayıt.Find(id); if (park_Kayıt == null)
+{
+return HttpNotFound();
+}
+return View(park_Kayıt);
+}
+
+// POST: Araç_Giriş_Çıkış/Delete/5 [HttpPost, ActionName("Delete")] [ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id)
+{
+Park_Kayıt park_Kayıt = db.Park_Kayıt.Find(id); db.Park_Kayıt.Remove(park_Kayıt); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+protected override void Dispose(bool disposing)
+{
+if (disposing)
+{
+db.Dispose();
+}
+base.Dispose(disposing);
+}
+}
+}
+
+
+Personel rezervasyon işlemleri kodları:
+
+using System;
+using System.Collections.Generic; using System.Data.Entity;
+using System.Linq; using System.Web; using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+ 
+namespace Garaj_Otomasyonu.Controllers
+{
+public class PerRezervasyonController : Controller
+{
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: PerRezervasyon public ActionResult Index()
+{
+var rezervasyon = db.Rezervasyon.Include(r => r.Parkdurumu); return View(rezervasyon.ToList());
+}
+}
+}
+
+Personel ana sayfası:
+
+using System;
+using System.Collections.Generic; using System.Linq;
+using System.Data.Entity; using System.Web;
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class PersonelAnasayfaController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: PersonelAnasayfa public ActionResult Index()
+{
+return View(db.Parkdurumu.ToList());
+}
+}
+}
+
+Personel login girişi:
+
+using System;
+using Garaj_Otomasyonu.Models;
+using Garaj_Otomasyonu.Models.Entity; using System.Collections.Generic;
+using System.Linq; using System.Web; using System.Web.Mvc;
+using System.Web.Security;
+ 
+namespace Garaj_Otomasyonu.Controllers
+{
+public class PersonelGirişController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+//private object FormsAuthentication;
+
+// GET: PersonelGiriş public ActionResult Login()
+{
+return View();
+}
+[HttpPost]
+public ActionResult Login(Personel_Giriş Personel)
+{
+var personel = db.Personel_Giriş.FirstOrDefault(x => x.TC_No == Personel.TC_No && x.Sifre == Personel.Sifre);
+if (personel != null)
+{
+
+FormsAuthentication.SetAuthCookie(personel.TC_No , false); return RedirectToAction("Index", "PersonelAnasayfa");
+}
+else
+{
+ViewBag.Mesaj = "Geçersiz Kullanıcı Adı veya Şifre"; return View();
+}
+}
+public ActionResult Logout()
+{
+FormsAuthentication.SignOut(); return View("Login");
+}
+}
+}
+
+
+
+Personel müşteri listesi ve işlemleri:
+
+using System;
+using System.Collections.Generic; using System.Data;
+using System.Data.Entity; using System.Linq;
+using System.Net; using System.Web;
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+ 
+namespace Garaj_Otomasyonu.Controllers
+{
+public class MusteriListesiController : Controller
+{
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: MusteriListesi public ActionResult Index()
+{
+return View(db.Musteri_Listesi.ToList());
+}
+
+// GET: MusteriListesi/Details/5 public ActionResult Details(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+}
+
+// GET: MusteriListesi/Create public ActionResult Create()
+{
+return View();
+}
+
+// POST: MusteriListesi/Create
+// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+// more details see http://go.microsoft.com/fwlink/?LinkId=317598. [HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "id,Tc_No,Ad,Soyad,Cep_Telefonu,Plaka,Kullanıcı_Adı,E_Posta,Sifre,Sifre_Tekrar")] Musteri_Listesi musteri_Listesi)
+{
+if (!ModelState.IsValid)
+{
+return View("Create");
+}
+db.Musteri_Listesi.Add(musteri_Listesi); db.SaveChanges();
+return RedirectToAction("Index");
+ 
+//return View(musteri_Listesi);
+}
+
+// GET: MusteriListesi/Edit/5 public ActionResult Edit(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+}
+
+// POST: MusteriListesi/Edit/5
+// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+// more details see http://go.microsoft.com/fwlink/?LinkId=317598. [HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Edit([Bind(Include = "id,Tc_No,Ad,Soyad,Cep_Telefonu,Plaka,Kullanıcı_Adı,E_Posta,Sifre,Sifre_Tekrar")] Musteri_Listesi musteri_Listesi)
+{
+if (ModelState.IsValid)
+{
+db.Entry(musteri_Listesi).State = EntityState.Modified; db.SaveChanges();
+return RedirectToAction("Index");
+}
+return View(musteri_Listesi);
+}
+
+// GET: MusteriListesi/Delete/5 public ActionResult Delete(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); if (musteri_Listesi == null)
+{
+return HttpNotFound();
+}
+return View(musteri_Listesi);
+ 
+}
+
+// POST: MusteriListesi/Delete/5 [HttpPost, ActionName("Delete")] [ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id)
+{
+Musteri_Listesi musteri_Listesi = db.Musteri_Listesi.Find(id); db.Musteri_Listesi.Remove(musteri_Listesi); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+protected override void Dispose(bool disposing)
+{
+if (disposing)
+{
+db.Dispose();
+}
+base.Dispose(disposing);
+}
+}
+}
+----------------------------------------------
+YÖNETİCİ İÇİN ASP.NET KODLARI
+
+Yönetici ana sayfası:
+
+using System;
+using System.Collections.Generic; using System.Linq;
+using System.Web; using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class YoneticiAnasayfaController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: Yonetici
+public ActionResult Index()
+{
+return View(db.Parkdurumu.ToList());
+}
+}
+}
+
+Yönetici login girişi:
+
+using System;
+using Garaj_Otomasyonu.Models;
+using Garaj_Otomasyonu.Models.Entity; using System.Collections.Generic;
+using System.Linq; using System.Web; using System.Web.Mvc;
+using System.Web.Security;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class YoneticiGirişController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: YoneticiGiriş public ActionResult Login()
+{
+return View();
+}
+[HttpPost]
+public ActionResult Login(Yonetici_Giriş Yonetici)
+{
+var yonetici = db.Yonetici_Giriş.FirstOrDefault(x => x.TC_No == Yonetici.TC_No && x.Sifre == Yonetici.Sifre);
+if (yonetici != null)
+ 
+{
+
+FormsAuthentication.SetAuthCookie(yonetici.TC_No, false); return RedirectToAction("Index", "YoneticiAnasayfa");
+}
+else
+{
+ViewBag.Mesaj = "Geçersiz Kullanıcı Adı veya Şifre"; return View();
+}
+}
+public ActionResult Logout()
+{
+FormsAuthentication.SignOut(); return View("Login");
+}
+}
+}
+
+Yönetici Araç Giriş-Çıkış / Otopark Gelir Bilgisi görmesi:
+
+using System;
+using System.Collections.Generic; using System.Data.Entity;
+using System.Linq; using System.Web; using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class ARACGİRCIKController : Controller
+{
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: ARACGİRCIK
+public ActionResult Index()
+{
+var park_Kayıt = db.Park_Kayıt.Include(p => p.Parkdurumu); return View(park_Kayıt.ToList());
+}
+}
+}
+
+Yönetici müşteri listesi görmesi:
+
+using System;
+using System.Collections.Generic; using System.Linq;
+using System.Web;
+ 
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+
+namespace Garaj_Otomasyonu.Controllers
+{
+
+public class MUSTERIController : Controller
+{
+
+Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+// GET: MUSTERI
+public ActionResult Index()
+{
+
+return View(db.Musteri_Listesi.ToList());
+}
+}
+}
+
+
+Yöneticinin Personel listesi görmesi ve personel ekle sil güncelle yapabilmesi:
+
+using System;
+using System.Collections.Generic; using System.Data;
+using System.Data.Entity; using System.Linq;
+using System.Net; using System.Web;
+using System.Web.Mvc;
+using Garaj_Otomasyonu.Models.Entity;
+
+namespace Garaj_Otomasyonu.Controllers
+{
+public class PersonelListesiController : Controller
+{
+private Otopark_OtomasyonuEntities1 db = new Otopark_OtomasyonuEntities1();
+
+// GET: PersonelListesi public ActionResult Index()
+{
+return View(db.Personel_Giriş.ToList());
+}
+ 
+// GET: PersonelListesi/Details/5 public ActionResult Details(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Personel_Giriş personel_Giriş = db.Personel_Giriş.Find(id); if (personel_Giriş == null)
+{
+return HttpNotFound();
+}
+return View(personel_Giriş);
+}
+
+// GET: PersonelListesi/Create public ActionResult Create()
+{
+return View();
+}
+
+// POST: PersonelListesi/Create [HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Create([Bind(Include = "id,Ad,Soyad,TC_No,Telefon,Sifre")] Personel_Giriş personel_Giriş)
+{
+if (ModelState.IsValid)
+{
+db.Personel_Giriş.Add(personel_Giriş); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+return View(personel_Giriş);
+}
+
+// GET: PersonelListesi/Edit/5 public ActionResult Edit(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Personel_Giriş personel_Giriş = db.Personel_Giriş.Find(id); if (personel_Giriş == null)
+{
+return HttpNotFound();
+}
+ 
+return View(personel_Giriş);
+}
+
+// POST: PersonelListesi/Edit/5 [HttpPost] [ValidateAntiForgeryToken]
+public ActionResult Edit([Bind(Include = "id,Ad,Soyad,TC_No,Telefon,Sifre")] Personel_Giriş personel_Giriş)
+{
+if (ModelState.IsValid)
+{
+db.Entry(personel_Giriş).State = EntityState.Modified; db.SaveChanges();
+return RedirectToAction("Index");
+}
+return View(personel_Giriş);
+}
+
+// GET: PersonelListesi/Delete/5 public ActionResult Delete(int? id)
+{
+if (id == null)
+{
+return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+}
+Personel_Giriş personel_Giriş = db.Personel_Giriş.Find(id); if (personel_Giriş == null)
+{
+return HttpNotFound();
+}
+return View(personel_Giriş);
+}
+
+// POST: PersonelListesi/Delete/5 [HttpPost, ActionName("Delete")] [ValidateAntiForgeryToken]
+public ActionResult DeleteConfirmed(int id)
+{
+Personel_Giriş personel_Giriş = db.Personel_Giriş.Find(id); db.Personel_Giriş.Remove(personel_Giriş); db.SaveChanges();
+return RedirectToAction("Index");
+}
+
+protected override void Dispose(bool disposing)
+{
+if (disposing)
+{
+db.Dispose();
+}
+ 
+base.Dispose(disposing);
+}
+}
+}

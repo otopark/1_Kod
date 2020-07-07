@@ -1,0 +1,1971 @@
+MÜŞTERİ HTML KODLARI
+
+Müşteri giriş:
+
+@using Garaj_Otomasyonu.Models
+
+@model Garaj_Otomasyonu.Models.Entity.Musteri_Listesi @{
+ViewBag.Title = "Login";
+
+Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Müşteri Giriş</h2>
+
+<!DOCTYPE html>
+
+@ViewBag.Mesaj
+
+<html>
+
+<body>
+
+@using (Html.BeginForm("Login", "MusteriGiriş", FormMethod.Post))
+
+{
+
+<div class="form-horizontal">
+
+<hr />
+
+<div class="form-group">
+
+@Html.LabelFor(model => model.Kullanıcı_Adı, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+
+@Html.TextBoxFor(model => model.Kullanıcı_Adı, new { htmlAttributes = new
+{ @class = "form-control", placeholder = "Tc Kimlik No" } })
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+ 
+<div class="col-md-10">
+
+@Html.PasswordFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control", placeholder = "Parola" } })
+</div>
+
+</div>
+
+<div class="form-group">
+
+<div class="col-md-offset-2 col-md-10">
+
+<input type="submit" value="Giriş" class="btn btn-default" />
+
+</div>
+
+</div>
+
+<p>
+
+@Html.ActionLink("Kayıt Ol", "Create")
+
+</p>
+
+</div>
+
+}
+
+</body>
+
+</html>
+
+Müşteri kayıt:
+
+@model Garaj_Otomasyonu.Models.Entity.Musteri_Listesi @{
+ViewBag.Title = "Create";
+Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>Yeni Kayıt</h2> @using (Html.BeginForm())
+{
+
+@Html.AntiForgeryToken()
+ 
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+@Html.LabelFor(model => model.Tc_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Tc_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Tc_No, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+ 
+<div class="form-group">
+@Html.LabelFor(model => model.Cep_Telefonu, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Cep_Telefonu, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Cep_Telefonu, "", new { @class = "text-danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Plaka, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Plaka, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Plaka, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Kullanıcı_Adı, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Kullanıcı_Adı, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Kullanıcı_Adı, "", new { @class = "text-danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.E_Posta, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+ 
+@Html.EditorFor(model => model.E_Posta, new { htmlAttributes = new { @class
+= "form-control" } })
+@Html.ValidationMessageFor(model => model.E_Posta, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre_Tekrar, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre_Tekrar, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre_Tekrar, "", new { @class = "text-danger" })
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Kayıt Ol" class="btn btn-default" />
+</div>
+</div>
+</div>
+
+}
+ 
+
+<div>
+@Html.ActionLink("Giriş sayfasına geri dön", "Login")
+</div>
+Müşteri ana sayfa:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Parkdurumu> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+}
+
+<h2>Park Yeri Bilgisi</h2>
+
+<table class="table">
+<tr>
+<th>PARK YERİ NUMARASI</th>
+<th>PARK BİLGİSİ DURUMU</th>
+
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.parkno)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.durum)
+</td>
+
+</tr>
+}
+
+</table>
+
+Müşteri bilgileri:
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Musteri_Listesi> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+}
+
+<h2>Bilgilerim</h2>
+ 
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Tc_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cep_Telefonu)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Kullanıcı_Adı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.E_Posta)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Sifre)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Sifre_Tekrar)
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model) {
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Tc_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Cep_Telefonu)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+</td>
+<td>
+ 
+@Html.DisplayFor(modelItem => item.Kullanıcı_Adı)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.E_Posta)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Sifre)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Sifre_Tekrar)
+</td>
+<td>
+@Html.ActionLink("Güncelle", "Edit", new { id=item.id }) | @Html.ActionLink("Sil", "Delete", new { id=item.id })
+</td>
+</tr>
+}
+
+</table>
+
+Müşteri bilgisini güncelle:
+@model Garaj_Otomasyonu.Models.Entity.Musteri_Listesi @{
+ViewBag.Title = "Edit";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+}
+
+<h2>Güncelle</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" }) @Html.HiddenFor(model => model.id)
+
+<div class="form-group">
+@Html.LabelFor(model => model.Tc_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Tc_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Tc_No, "", new { @class = "text- danger" })
+ 
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Cep_Telefonu, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Cep_Telefonu, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Cep_Telefonu, "", new { @class = "text-danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Plaka, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Plaka, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Plaka, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Kullanıcı_Adı, htmlAttributes: new { @class = "control-label col-md-2" })
+ 
+<div class="col-md-10">
+@Html.EditorFor(model => model.Kullanıcı_Adı, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Kullanıcı_Adı, "", new { @class = "text-danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.E_Posta, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.E_Posta, new { htmlAttributes = new { @class
+= "form-control" } })
+@Html.ValidationMessageFor(model => model.E_Posta, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre_Tekrar, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre_Tekrar, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre_Tekrar, "", new { @class = "text-danger" })
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Güncelle" class="btn btn-default" />
+</div>
+</div>
+</div>
+}
+
+<div>
+ 
+@Html.ActionLink("Bilgilerime Geri Dön", "Index")
+</div>
+
+Müşteri bilgisini sil:
+
+@model Garaj_Otomasyonu.Models.Entity.Musteri_Listesi @{
+ViewBag.Title = "Delete";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+<h2>Sil</h2>
+<h3>Hesabınızı silmek istediğinizden emin misiniz?</h3>
+<div>
+<hr />
+<dl class="dl-horizontal">
+<dt>
+@Html.DisplayNameFor(model => model.Tc_No)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Tc_No)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Ad)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Ad)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Soyad)
+</dt>
+ 
+<dd>
+@Html.DisplayFor(model => model.Soyad)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Cep_Telefonu)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Cep_Telefonu)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Plaka)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Plaka)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Kullanıcı_Adı)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Kullanıcı_Adı)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.E_Posta)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.E_Posta)
+</dd>
+ 
+<dt>
+@Html.DisplayNameFor(model => model.Sifre)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Sifre)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Sifre_Tekrar)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Sifre_Tekrar)
+</dd>
+</dl>
+@using (Html.BeginForm()) { @Html.AntiForgeryToken()
+<div class="form-actions no-color">
+<input type="submit" value="Sil" class="btn btn-default" /> | @Html.ActionLink("Bilgilerime Geri Dön", "Index")
+</div>
+
+}
+</div>
+
+
+Müşteri rezervasyon:
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Rezervasyon> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+ 
+<h2>Rezervasyonlarım</h2>
+<p>
+@Html.ActionLink("Yeni Kayıt", "Create")
+</p>
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.TC_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Saat)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</th>
+<th></th>
+</tr>
+ 
+@foreach (var item in Model) {
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.TC_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Saat)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Parkdurumu.parkno)
+</td>
+<td>
+@Html.ActionLink("Güncelle", "Edit", new { id=item.id }) | @Html.ActionLink("Detaylar", "Details", new { id=item.id }) | @Html.ActionLink("Sil", "Delete", new { id=item.id })
+</td>
+</tr>
+
+}
+</table>
+ 
+Müşteri rezervasyon yap:
+@model Garaj_Otomasyonu.Models.Entity.Rezervasyon @{
+ViewBag.Title = "Create";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+<h2>Rezervasyonlarım</h2>
+<h3>Yeni Kayıt</h3> @using (Html.BeginForm())
+{
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+ 
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.TC_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.TC_No, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Saat, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Saat, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Saat, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Plaka, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Plaka, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Plaka, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+ 
+@Html.LabelFor(model => model.Park_Yeri, "Park_Yeri", htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.DropDownList("Park_Yeri", null, htmlAttributes: new { @class = "form- control" })
+@Html.ValidationMessageFor(model => model.Park_Yeri, "", new { @class = "text-danger" })
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Kaydet" class="btn btn-default" />
+</div>
+</div>
+</div>
+
+}
+<div>
+@Html.ActionLink("Rezervasyonlarıma Geri Dön", "Index")
+</div>
+
+
+Müşteri rezervasyon güncelle:
+@model Garaj_Otomasyonu.Models.Entity.Rezervasyon @{
+ViewBag.Title = "Edit";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+<h2>Güncelle</h2>
+@using (Html.BeginForm())
+{
+
+@Html.AntiForgeryToken()
+ 
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" }) @Html.HiddenFor(model => model.id)
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.TC_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.TC_No, "", new { @class = "text- danger" })
+</div>
+ 
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Saat, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Saat, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Saat, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Plaka, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Plaka, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Plaka, "", new { @class = "text- danger" })
+</div>
+</div>
+<div class="form-group">
+@Html.LabelFor(model => model.Park_Yeri, "Park_Yeri", htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.DropDownList("Park_Yeri", null, htmlAttributes: new { @class = "form- control" })
+@Html.ValidationMessageFor(model => model.Park_Yeri, "", new { @class = "text-danger" })
+</div>
+</div>
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+ 
+<input type="submit" value="Kaydet" class="btn btn-default" />
+</div>
+</div>
+</div>
+}
+
+<div>
+@Html.ActionLink("Rezervasyonlarıma Geri Dön", "Index")
+</div>
+
+
+Müşteri rezervasyon detaylar:
+@model Garaj_Otomasyonu.Models.Entity.Rezervasyon @{
+ViewBag.Title = "Details";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+<h2>Detay</h2>
+<div>
+<hr />
+<dl class="dl-horizontal">
+<dt>
+@Html.DisplayNameFor(model => model.Ad)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Ad)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Soyad)
+</dt>
+<dd>
+ 
+@Html.DisplayFor(model => model.Soyad)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.TC_No)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.TC_No)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Saat)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Saat)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Plaka)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Plaka)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Parkdurumu.parkno)
+</dd>
+</dl>
+</div>
+<p>
+ 
+@Html.ActionLink("Güncelle", "Edit", new { id = Model.id }) | @Html.ActionLink("Rezervasyonlarıma Geri Dön", "Index")
+</p>
+
+
+Müşteri rezervasyon sil:
+@model Garaj_Otomasyonu.Models.Entity.Rezervasyon @{
+ViewBag.Title = "Delete";
+Layout = "~/Views/Shared/Musteri_nawbar.cshtml";
+
+}
+<h2>Sil</h2>
+<h3>Rezervasyonunuzu silmek istediğinizden emin misiniz?</h3>
+<div>
+<hr />
+<dl class="dl-horizontal">
+<dt>
+@Html.DisplayNameFor(model => model.Ad)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Ad)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Soyad)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Soyad)
+</dd>
+
+
+<dt>
+ 
+@Html.DisplayNameFor(model => model.TC_No)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.TC_No)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Saat)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Saat)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Plaka)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Plaka)
+</dd>
+<dt>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</dt>
+<dd>
+@Html.DisplayFor(model => model.Parkdurumu.parkno)
+</dd>
+</dl>
+@using (Html.BeginForm()) { @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+<input type="submit" value="Sil" class="btn btn-default" /> |
+ 
+@Html.ActionLink("Rezervasyonlarıma Geri Dön", "Index")
+</div>
+}
+
+</div>
+----------------------------------------------------------
+PERSONEL HTML KODLARI
+
+Personel login girişi:
+
+@using Garaj_Otomasyonu.Models
+@model Garaj_Otomasyonu.Models.Entity.Personel_Giriş @{
+ViewBag.Title = "Login";
+// Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Personel Giriş</h2>
+
+<!DOCTYPE html>
+
+@ViewBag.Mesaj
+<html>
+<body>
+@using (Html.BeginForm("Login", "PersonelGiriş", FormMethod.Post))
+{
+
+<div class="form-horizontal">
+
+<hr />
+<div class="form-group">
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.TextBoxFor(model => model.TC_No, new { htmlAttributes = new
+{ @class = "form-control", placeholder = "Tc Kimlik No" } })
+
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.PasswordFor(model => model.Sifre, new { htmlAttributes = new
+{ @class = "form-control", placeholder = "Parola" } })
+
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Giriş" class="btn btn-default" />
+</div>
+</div>
+</div>
+ 
+}
+</body>
+</html>
+
+
+Personel ana sayfa ve otopark park yeri bilgisi:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Parkdurumu>
+
+@{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Park Yeri Bilgisi</h2>
+
+<table class="table">
+<tr>
+<th>PARK YERİ NUMARASI</th>
+<th>PARK BİLGİSİ DURUMU</th>
+
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.parkno)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.durum)
+</td>
+
+</tr>
+}
+
+</table>
+
+
+Müşterinin araç giriş-çıkış bilgileri:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Park_Kayıt>
+
+@{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Araç Giriş-Çıkış</h2>
+ 
+<p>
+@Html.ActionLink("Araç Giriş", "Create")
+</p>
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Tc_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Giriş_Zamanı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Çıkış_Zamanı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ücret)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model) {
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Tc_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Giriş_Zamanı)
+</td>
+ 
+<td>
+@Html.DisplayFor(modelItem => item.Çıkış_Zamanı)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Ücret)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Parkdurumu.parkno)
+</td>
+<td>
+@Html.ActionLink("Güncelle / Araç Çıkış", "Edit", new { id=item.id }) | @Html.ActionLink("Detaylar", "Details", new { id=item.id }) | @Html.ActionLink("Sil", "Delete", new { id=item.id })
+</td>
+</tr>
+}
+
+</table>
+
+Müşterinin araç giriş-çıkış güncelle:
+
+@model Garaj_Otomasyonu.Models.Entity.Park_Kayıt
+
+
+@{
+ViewBag.Title = "Create";
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+
+<h2>Araç Giriş</h2>
+
+
+
+
+@using (Html.BeginForm())
+{
+
+@Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+ 
+<div class="form-group">
+@Html.LabelFor(model => model.Tc_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Tc_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Tc_No, "", new { @class = "text- danger" })
+</div>
+</div>
+
+
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+ 
+<div class="form-group">
+@Html.LabelFor(model => model.Plaka, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Plaka, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Plaka, "", new { @class = "text- danger" })
+</div>
+</div>
+
+
+<div class="form-group">
+@Html.LabelFor(model => model.Park_Yeri, "Park_Yeri", htmlAttributes: new
+{ @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.DropDownList("Park_Yeri", null, htmlAttributes: new { @class = "form- control" })
+@Html.ValidationMessageFor(model => model.Park_Yeri, "", new { @class = "text-danger" })
+</div>
+</div>
+
+
+<div class="form-group">
+@Html.LabelFor(model => model.Giriş_Zamanı, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Giriş_Zamanı, "{0: d MMM yyyy}", new
+{ htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Giriş_Zamanı, "", new { @class = "text-danger" })
+</div>
+</div>
+ 
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Kaydet" class="btn btn-default" />
+</div>
+</div>
+</div>
+}
+
+
+<div>
+@Html.ActionLink("Araç Giriş-Çıkış Listesine Geri Dön", "Index")
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+Müşterinin araç giriş-çıkış detaylar:
+
+@model Garaj_Otomasyonu.Models.Entity.Park_Kayıt
+
+
+@{
+
+ViewBag.Title = "Details";
+
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+
+<h2>Detay</h2>
+
+
+<div>
+ 
+<hr />
+
+<dl class="dl-horizontal">
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Tc_No)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Tc_No)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Ad)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Ad)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Soyad)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Soyad)
+
+</dd>
+
+
+<dt>
+ 
+@Html.DisplayNameFor(model => model.Plaka)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Plaka)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Giriş_Zamanı)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Giriş_Zamanı)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Çıkış_Zamanı)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Çıkış_Zamanı)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Ücret)
+
+</dt>
+ 
+<dd>
+
+@Html.DisplayFor(model => model.Ücret)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Parkdurumu.parkno)
+
+</dd>
+
+
+</dl>
+
+</div>
+
+<p>
+
+@Html.ActionLink("Güncelle", "Edit", new { id = Model.id }) | @Html.ActionLink("Araç Giriş-Çıkış Listesine Geri Dön", "Index")
+</p>
+
+
+Müşterinin araç giriş-çıkış sil:
+
+@model Garaj_Otomasyonu.Models.Entity.Park_Kayıt
+
+
+@{
+
+ViewBag.Title = "Delete";
+
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+ 
+<h2>Sil</h2>
+
+
+<h3>Aracı silmek istediğinizden emin misiniz?</h3>
+
+<div>
+
+<hr />
+
+<dl class="dl-horizontal">
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Tc_No)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Tc_No)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Ad)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Ad)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Soyad)
+
+</dt>
+
+
+<dd>
+ 
+@Html.DisplayFor(model => model.Soyad)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Plaka)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Plaka)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Giriş_Zamanı)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Giriş_Zamanı)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Çıkış_Zamanı)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Çıkış_Zamanı)
+
+</dd>
+ 
+<dt>
+
+@Html.DisplayNameFor(model => model.Ücret)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Ücret)
+
+</dd>
+
+
+<dt>
+
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+
+</dt>
+
+
+<dd>
+
+@Html.DisplayFor(model => model.Parkdurumu.parkno)
+
+</dd>
+
+
+</dl>
+
+
+@using (Html.BeginForm()) { @Html.AntiForgeryToken()
+
+
+<div class="form-actions no-color">
+
+<input type="submit" value="Sil" class="btn btn-default" /> | @Html.ActionLink("Araç Giriş-Çıkış Listesine Geri Dön", "Index")
+</div>
+
+}
+
+</div>
+ 
+Rezervasyon bilgileri:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Rezervasyon> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Rezervasyonlar</h2>
+
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.TC_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Saat)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.TC_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Saat)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+ 
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Parkdurumu.parkno)
+</td>
+</tr>
+}
+</table>
+---------------------------------
+YÖNETİCİ HTML KODLARI
+
+Yönetici login girişi:
+
+@using Garaj_Otomasyonu.Models
+@model Garaj_Otomasyonu.Models.Entity.Yonetici_Giriş @{
+ViewBag.Title = "Login";
+Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yönetici Giriş</h2>
+
+<!DOCTYPE html>
+
+@ViewBag.Mesaj
+<html>
+<body>
+@using (Html.BeginForm("Login", "YoneticiGiriş", FormMethod.Post))
+{
+
+<div class="form-horizontal">
+
+<hr />
+<div class="form-group">
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.TextBoxFor(model => model.TC_No, new { htmlAttributes = new { @class = "form-control", placeholder = "Tc Kimlik No" } })
+
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.PasswordFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control", placeholder = "Parola" } })
+
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Giriş" class="btn btn-default" />
+</div>
+</div>
+</div>
+ 
+}
+</body>
+</html>
+
+Yönetici ana sayfası:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Parkdurumu> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Park Yeri Bilgisi</h2>
+
+<table class="table">
+<tr>
+<th>PARK YERİ NUMARASI</th>
+<th>PARK BİLGİSİ DURUMU</th>
+
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.parkno)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.durum)
+</td>
+
+</tr>
+}
+
+</table>
+
+
+
+Müşterinin araç giriş- çıkış / otopark gelir bilgisi bilgileri:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Park_Kayıt>
+
+@{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Araç Giriş-Çıkış / Otopark Gelir Bilgisi</h2>
+ 
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Tc_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Giriş_Zamanı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Çıkış_Zamanı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ücret)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Parkdurumu.parkno)
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Tc_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Giriş_Zamanı)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Çıkış_Zamanı)
+</td>
+ 
+<td>
+@Html.DisplayFor(modelItem => item.Ücret)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Parkdurumu.parkno)
+</td>
+
+</tr>
+}
+
+</table>
+
+Müşterilerin listesi:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Musteri_Listesi> @{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Müşteri Listesi</h2>
+
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Tc_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Cep_Telefonu)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Plaka)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Kullanıcı_Adı)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.E_Posta)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Sifre)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Sifre_Tekrar)
+ 
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model)
+{
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Tc_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Cep_Telefonu)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Plaka)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Kullanıcı_Adı)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.E_Posta)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Sifre)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Sifre_Tekrar)
+</td>
+
+</tr>
+}
+
+</table>
+
+
+Personel listesi:
+
+@model IEnumerable<Garaj_Otomasyonu.Models.Entity.Personel_Giriş>
+
+@{
+ViewBag.Title = "Index";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+ 
+<h2>Personel Listesi</h2>
+
+<p>
+@Html.ActionLink("Yeni Kayıt", "Create")
+</p>
+<table class="table">
+<tr>
+<th>
+@Html.DisplayNameFor(model => model.Ad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Soyad)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.TC_No)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Telefon)
+</th>
+<th>
+@Html.DisplayNameFor(model => model.Sifre)
+</th>
+<th></th>
+</tr>
+
+@foreach (var item in Model) {
+<tr>
+<td>
+@Html.DisplayFor(modelItem => item.Ad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Soyad)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.TC_No)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Telefon)
+</td>
+<td>
+@Html.DisplayFor(modelItem => item.Sifre)
+</td>
+<td>
+@Html.ActionLink("Güncelle", "Edit", new { id=item.id }) | @Html.ActionLink("Detaylar", "Details", new { id=item.id }) | @Html.ActionLink("Sil", "Delete", new { id=item.id })
+</td>
+</tr>
+}
+ 
+</table>
+
+Personel yeni kayıt:
+
+@model Garaj_Otomasyonu.Models.Entity.Personel_Giriş
+
+@{
+ViewBag.Title = "Create";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Per Listesi</h2>
+<h3>Yeni Kayıt</h3>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.TC_No, new { htmlAttributes = new { @class = "form-control" } })
+ 
+@Html.ValidationMessageFor(model => model.TC_No, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class
+= "form-control" } })
+@Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Kaydet" class="btn btn-default" />
+</div>
+</div>
+</div>
+}
+
+<div>
+@Html.ActionLink("Personel Listesine Geri Dön", "Index")
+</div>
+
+Personel sil:
+
+@model Garaj_Otomasyonu.Models.Entity.Personel_Giriş
+
+@{
+ViewBag.Title = "Delete";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Sil</h2>
+ 
+<h3>Kişiyi silmek istediğinizden emin misiniz?</h3>
+<div>
+
+<hr />
+<dl class="dl-horizontal">
+<dt>
+@Html.DisplayNameFor(model => model.Ad)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Ad)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Soyad)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Soyad)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.TC_No)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.TC_No)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Telefon)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Telefon)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Sifre)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Sifre)
+</dd>
+
+</dl>
+
+@using (Html.BeginForm()) { @Html.AntiForgeryToken()
+ 
+<div class="form-actions no-color">
+<input type="submit" value="Sil" class="btn btn-default" /> | @Html.ActionLink("Personel Listesine Geri Dön", "Index")
+</div>
+}
+</div>
+
+Personel güncelle:
+
+@model Garaj_Otomasyonu.Models.Entity.Personel_Giriş
+
+@{
+ViewBag.Title = "Edit";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Güncelle</h2>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+<hr />
+@Html.ValidationSummary(true, "", new { @class = "text-danger" }) @Html.HiddenFor(model => model.id)
+
+<div class="form-group">
+@Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Soyad, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Soyad, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Soyad, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+ 
+@Html.LabelFor(model => model.TC_No, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.TC_No, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.TC_No, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class
+= "form-control" } })
+@Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+@Html.LabelFor(model => model.Sifre, htmlAttributes: new { @class = "control- label col-md-2" })
+<div class="col-md-10">
+@Html.EditorFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control" } })
+@Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text- danger" })
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-md-offset-2 col-md-10">
+<input type="submit" value="Güncelle" class="btn btn-default" />
+</div>
+</div>
+</div>
+}
+
+<div>
+@Html.ActionLink("Personel Listesine Geri Dön", "Index")
+</div>
+
+
+Personel detay:
+
+@model Garaj_Otomasyonu.Models.Entity.Personel_Giriş
+ 
+@{
+ViewBag.Title = "Details";
+Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>Detay</h2>
+
+<div>
+<hr />
+<dl class="dl-horizontal">
+<dt>
+@Html.DisplayNameFor(model => model.Ad)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Ad)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Soyad)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Soyad)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.TC_No)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.TC_No)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Telefon)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Telefon)
+</dd>
+
+<dt>
+@Html.DisplayNameFor(model => model.Sifre)
+</dt>
+
+<dd>
+@Html.DisplayFor(model => model.Sifre)
+</dd>
+ 
+</dl>
+</div>
+<p>
+@Html.ActionLink("Güncelle", "Edit", new { id = Model.id }) | @Html.ActionLink("Personel Listesine Geri Dön", "Index")
+</p>
