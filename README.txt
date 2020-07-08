@@ -15,5 +15,5 @@ Denetleyici sorumlulukları
 Denetleyiciler, kullanıcı etkileşimini işleyen, modeliyle çalışan ve sonunda işlenecek bir görünüm olan bileşenleridir. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. MVC modelinde, denetleyici ilk giriş noktasıdır ve hangi model türlerinin birlikte çalışacağını ve hangi görünümün işleneceğini seçmekten sorumludur (Bu nedenle adı, uygulamanın belirli bir istek için nasıl yanıt verdiğini denetler).
 
 -------------------------------WEB SİTESİ-----------------------------------------------------------------------------------------------------------------------------
-Müşteri web sitesinden veya otoparkımızı ziyaret ederek rezervasyon işlemi yaparak, daha sonra istediği park yerini seçtikten sonra ödeme işlemi yaparak aracını otopark park edebilir.
+Müşteri web sitesinden veya otoparkımızı ziyaret ederek rezervasyon işlemi yaparak, daha sonra istediği park yerini seçtikten sonra ödeme işlemi yaparak aracını otopark park edebilir. 
 
