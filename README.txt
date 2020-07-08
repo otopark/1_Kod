@@ -16,3 +16,4 @@ Denetleyiciler, kullanıcı etkileşimini işleyen, modeliyle çalışan ve sonu
 
 -------------------------------WEB SİTESİ-----------------------------------------------------------------------------------------------------------------------------
 Müşteri web sitesinden veya otoparkımızı ziyaret ederek rezervasyon işlemi yaparak, daha sonra istediği park yerini seçtikten sonra ödeme işlemi yaparak aracını otopark park edebilir.
+
